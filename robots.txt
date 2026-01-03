@@ -1,0 +1,69 @@
+# robots.txt for DraftaCV
+# Website: https://draftacv.com/
+
+# Allow all search engines to crawl public pages
+User-agent: *
+
+# Block the entire admin/CMS directory
+Disallow: /admin/
+Disallow: /admin/*
+
+# Block Firebase config (security - prevents exposing config)
+Disallow: /js/firebase-config.js
+
+# Block common admin/login patterns (extra protection)
+Disallow: /cms/
+
+# Allow CSS and JS (important for proper page rendering in search results)
+Allow: /css/
+Allow: /js/
+
+# Allow images and carousel (important for image search and social sharing)
+Allow: /images/
+Allow: /carousel/
+
+# Allow all public HTML pages
+Allow: /index.html
+Allow: /blog.html
+Allow: /blog-post.html
+Allow: /cv-checker.html
+Allow: /samples.html
+Allow: /privacy-policy.html
+Allow: /terms-of-service.html
+
+# Allow all blog posts (ATS-related content - HIGH PRIORITY)
+Allow: /blog/
+Allow: /blog/how-to-optimize-resume-for-ats.html
+Allow: /blog/ats-friendly-resume-templates.html
+Allow: /blog/resume-keywords-guide.html
+Allow: /blog/common-resume-mistakes-to-avoid.html
+Allow: /blog/professional-summary-examples.html
+Allow: /blog/resume-formats-comparison.html
+Allow: /blog/action-verbs-for-resumes.html
+Allow: /blog/career-change-resume-tips.html
+Allow: /blog/entry-level-resume-guide.html
+Allow: /blog/linkedin-profile-optimization.html
+Allow: /blog/cover-letter-writing-tips.html
+Allow: /blog/job-interview-preparation.html
+
+# Allow everything else by default
+Allow: /
+
+# Sitemap location - CRITICAL FOR SEO
+Sitemap: https://draftacv.com/sitemap.xml
+
+# No crawl-delay - allows search engines to crawl at full speed for faster indexing
+
+# Special instructions for Google (prioritize ATS checker)
+User-agent: Googlebot
+Allow: /cv-checker.html
+Allow: /samples.html
+Allow: /blog/
+Crawl-delay: 0
+
+# Special instructions for Bing
+User-agent: Bingbot
+Allow: /cv-checker.html
+Allow: /samples.html
+Allow: /blog/
+Crawl-delay: 0

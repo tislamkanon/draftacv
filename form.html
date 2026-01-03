@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Your Information - DraftaCV</title>
+  <link rel="icon" type="image/png" href="/images/Asset 6 (2).png">
+  <link rel="shortcut icon" type="image/png" href="/images/Asset 6 (2).png">
+  <meta name="description" content="Submit your information to get your professional CV/Resume built by DraftaCV.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/form-styles.css">
+   <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+        <a href="/index.html#home" class="nav-logo">
+      <img src="/images/Asset 6.png" alt="DraftaCV Logo" class="logo-image">
+    </a>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="/index.html#home" class="nav-link">Home</a>
+        <a href="/cv-checker.html" class="nav-link">ATS Scan</a>
+        <a href="/index.html#packages" class="nav-link">Packages</a>
+        <a href="/index.html#features" class="nav-link">Features</a>
+        <a href="/index.html#contact" class="nav-link">Contact</a>
+        <a href="/blog.html" class="nav-link">Blog</a>
+      </div>
+      
+      <a href="/index.html#packages" class="nav-cta">Get Started Today</a>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="/index.html#home" class="mobile-link">Home</a>
+      <a href="/cv-checker.html" class="mobile-link">ATS Scan</a>
+      <a href="/index.html#packages" class="mobile-link">Packages</a>
+      <a href="/index.html#features" class="mobile-link">Features</a>
+      <a href="/index.html#contact" class="mobile-link">Contact</a>
+      <a href="/blog.html" class="mobile-link">Blog</a>
+      <a href="/index.html#packages" class="mobile-cta">Get Started Today</a>
+    </div>
+  </nav>
+
+  <!-- Form Section -->
+  <section class="form-section">
+    <div class="form-container">
+      <div class="form-header">
+        <a href="/index.html#packages" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M19 12H5"/><path d="m12 19-7-7 7-7"/>
+          </svg>
+          Back to Packages
+        </a>
+        <h1 class="form-title">Submit Your Information</h1>
+        <div class="selected-package-display">
+          <span>Selected Package:</span>
+          <span class="package-name" id="selectedPackageName">Professional</span>
+          <span class="package-price" id="selectedPackagePrice">৳1,999</span>
+        </div>
+        <p class="form-subtitle">Please fill in all the details below to help us build your perfect resume. Fields marked with <span class="required-star">*</span> are required.</p>
+      </div>
+
+      <form id="cvForm" class="cv-form">
+        <!-- Personal Information -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M20 21a8 8 0 1 0-16 0"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Personal Information</h2>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="fullName">Full Name <span class="required-star">*</span></label>
+              <input type="text" id="fullName" name="fullName" required placeholder="e.g., John Doe">
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address <span class="required-star">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="e.g., john@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required-star">*</span></label>
+              <input type="tel" id="phone" name="phone" required placeholder="e.g., +880 1234 567890">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" placeholder="e.g., 123 Main Street, Dhaka, Bangladesh">
+            </div>
+            
+            <div class="form-group">
+              <label for="linkedin">LinkedIn Profile URL</label>
+              <input type="url" id="linkedin" name="linkedin" placeholder="e.g., https://linkedin.com/in/johndoe">
+            </div>
+            
+            <div class="form-group">
+              <label for="portfolio">Portfolio/Website URL</label>
+              <input type="url" id="portfolio" name="portfolio" placeholder="e.g., https://johndoe.com">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="professionalSummary">Professional Summary / Objective</label>
+              <textarea id="professionalSummary" name="professionalSummary" rows="4" placeholder="Write a brief summary about yourself and your career goals..."></textarea>
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="profilePhoto">Professional Photo</label>
+              <div class="file-upload-wrapper">
+                <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+                <div class="file-upload-display">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                    <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                    <circle cx="9" cy="9" r="2"/>
+                    <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                  </svg>
+                  <span>Click to upload or drag and drop</span>
+                  <span class="file-hint">PNG, JPG up to 2MB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+                <!-- Job Application Question -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Job Application</h2>
+          </div>
+          
+          <div class="job-application-section">
+            <div class="job-application-question">
+              <p>Are you applying for any specific job? <span class="required-star">*</span></p>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="applyingForJob" value="yes" required onchange="toggleJobApplicationFields(true)">
+                  <span class="radio-custom"></span>
+                  Yes
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="applyingForJob" value="no" required onchange="toggleJobApplicationFields(false)">
+                  <span class="radio-custom"></span>
+                  No
+                </label>
+              </div>
+            </div>
+            
+            <div id="jobApplicationFields" class="job-application-fields">
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="targetJobTitle">Target Job Title <span class="required-star">*</span></label>
+                  <input type="text" id="targetJobTitle" name="targetJobTitle" placeholder="e.g., Senior Software Engineer">
+                </div>
+                
+                <div class="form-group full-width">
+                  <label for="targetJobDescription">Job Description</label>
+                  <textarea id="targetJobDescription" name="targetJobDescription" rows="5" placeholder="Paste the job description here or describe the role you're applying for..."></textarea>
+                  <span class="field-hint">This helps us tailor your resume to the specific position</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Work Experience -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="14" x="2" y="7" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Work Experience</h2>
+          </div>
+          
+          <div id="workExperienceContainer">
+            <div class="experience-entry" data-index="0">
+              <div class="entry-header">
+                <span class="entry-number">Experience #1</span>
+                <button type="button" class="remove-entry-btn" onclick="removeWorkExperience(0)" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Job Title <span class="required-star">*</span></label>
+                  <input type="text" name="workTitle_0" required placeholder="e.g., Senior Software Engineer">
+                </div>
+                
+                <div class="form-group">
+                  <label>Company Name <span class="required-star">*</span></label>
+                  <input type="text" name="workCompany_0" required placeholder="e.g., Tech Corp Ltd.">
+                </div>
+                
+                <div class="form-group full-width">
+                  <label>Company Address / Location</label>
+                  <input type="text" name="workLocation_0" placeholder="e.g., Dhaka, Bangladesh">
+                </div>
+                
+                <div class="form-group">
+                  <label>Start Date <span class="required-star">*</span></label>
+                  <input type="month" name="workStartDate_0" required>
+                </div>
+                
+                <div class="form-group">
+                  <label>End Date</label>
+                  <div class="date-with-checkbox">
+                    <input type="month" name="workEndDate_0" id="workEndDate_0">
+                    <label class="checkbox-label">
+                      <input type="checkbox" name="workCurrent_0" onchange="toggleCurrentJob(0)">
+                      Currently working here
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-group full-width">
+                  <label>Key Responsibilities & Achievements</label>
+                  <textarea name="workDescription_0" rows="4" placeholder="Describe your key responsibilities, achievements, and impact in this role..."></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-entry-btn" onclick="addWorkExperience()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+            </svg>
+            Add Another Work Experience
+          </button>
+        </div>
+
+        <!-- Education -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Education</h2>
+          </div>
+          
+          <div id="educationContainer">
+            <div class="education-entry" data-index="0">
+              <div class="entry-header">
+                <span class="entry-number">Education #1</span>
+                <button type="button" class="remove-entry-btn" onclick="removeEducation(0)" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Degree / Certificate <span class="required-star">*</span></label>
+                  <input type="text" name="eduDegree_0" required placeholder="e.g., Bachelor of Science in Computer Science">
+                </div>
+                
+                <div class="form-group">
+                  <label>Institution Name <span class="required-star">*</span></label>
+                  <input type="text" name="eduInstitution_0" required placeholder="e.g., University of Dhaka">
+                </div>
+                
+                <div class="form-group">
+                  <label>Location</label>
+                  <input type="text" name="eduLocation_0" placeholder="e.g., Dhaka, Bangladesh">
+                </div>
+                
+                <div class="form-group">
+                  <label>GPA / Grade (optional)</label>
+                  <input type="text" name="eduGrade_0" placeholder="e.g., 3.8 / 4.0">
+                </div>
+                
+                <div class="form-group">
+                  <label>Start Year</label>
+                  <input type="number" name="eduStartYear_0" min="1950" max="2030" placeholder="e.g., 2018">
+                </div>
+                
+                <div class="form-group">
+                  <label>End Year (or Expected)</label>
+                  <input type="number" name="eduEndYear_0" min="1950" max="2030" placeholder="e.g., 2022">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-entry-btn" onclick="addEducation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+            </svg>
+            Add Another Education
+          </button>
+        </div>
+          <!--Made by MD Touhidul Islam Kanon-->
+        <!-- Skills -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Skills</h2>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Technical Skills</label>
+              <textarea id="technicalSkills" name="technicalSkills" rows="3" placeholder="e.g., JavaScript, Python, React, Node.js, SQL, AWS, Git..."></textarea>
+              <span class="field-hint">Separate skills with commas</span>
+            </div>
+            
+            <div class="form-group full-width">
+              <label>Soft Skills</label>
+              <textarea id="softSkills" name="softSkills" rows="3" placeholder="e.g., Leadership, Communication, Problem Solving, Team Management..."></textarea>
+              <span class="field-hint">Separate skills with commas</span>
+            </div>
+            
+            <div class="form-group full-width">
+              <label>Languages</label>
+              <textarea id="languages" name="languages" rows="2" placeholder="e.g., English (Fluent), Bengali (Native), Hindi (Conversational)..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="6"/>
+                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Certifications</h2>
+          </div>
+          
+          <div id="certificationsContainer">
+            <div class="certification-entry" data-index="0">
+              <div class="entry-header">
+                <span class="entry-number">Certification #1</span>
+                <button type="button" class="remove-entry-btn" onclick="removeCertification(0)" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Certification Name</label>
+                  <input type="text" name="certName_0" placeholder="e.g., AWS Solutions Architect">
+                </div>
+                
+                <div class="form-group">
+                  <label>Issuing Organization</label>
+                  <input type="text" name="certOrg_0" placeholder="e.g., Amazon Web Services">
+                </div>
+                
+                <div class="form-group">
+                  <label>Issue Date</label>
+                  <input type="month" name="certDate_0">
+                </div>
+                
+                <div class="form-group">
+                  <label>Credential ID (optional)</label>
+                  <input type="text" name="certId_0" placeholder="e.g., ABC123XYZ">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-entry-btn" onclick="addCertification()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+            </svg>
+            Add Another Certification
+          </button>
+        </div>
+
+        <!-- Interests -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Interests & Hobbies</h2>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Interests & Hobbies</label>
+              <textarea id="interests" name="interests" rows="3" placeholder="e.g., Reading, Photography, Open Source Contributing, Traveling, Playing Chess..."></textarea>
+              <span class="field-hint">Optional but helps personalize your resume</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- References -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h2 class="section-title">References</h2>
+          </div>
+          
+          <div id="referencesContainer">
+            <div class="reference-entry" data-index="0">
+              <div class="entry-header">
+                <span class="entry-number">Reference #1</span>
+                <button type="button" class="remove-entry-btn" onclick="removeReference(0)" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                    <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Reference Name</label>
+                  <input type="text" name="refName_0" placeholder="e.g., Dr. Jane Smith">
+                </div>
+                
+                <div class="form-group">
+                  <label>Job Title / Relationship</label>
+                  <input type="text" name="refTitle_0" placeholder="e.g., Senior Manager at Tech Corp">
+                </div>
+                
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" name="refEmail_0" placeholder="e.g., jane.smith@techcorp.com">
+                </div>
+                
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="tel" name="refPhone_0" placeholder="e.g., +880 1234 567890">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <button type="button" class="add-entry-btn" onclick="addReference()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>
+            </svg>
+            Add Another Reference
+          </button>
+        </div>
+
+        <!-- Existing CV Upload -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                <path d="M12 12v6"/>
+                <path d="m15 15-3-3-3 3"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Existing CV</h2>
+          </div>
+          
+          <div class="existing-cv-section">
+            <div class="cv-question">
+              <p>Do you have an existing CV/Resume that you'd like us to reference?</p>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="hasExistingCV" value="yes" onchange="toggleCVUpload(true)">
+                  <span class="radio-custom"></span>
+                  Yes, I have one
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="hasExistingCV" value="no" checked onchange="toggleCVUpload(false)">
+                  <span class="radio-custom"></span>
+                  No, I don't
+                </label>
+              </div>
+            </div>
+            
+            <div id="cvUploadSection" class="cv-upload-section" style="display: none;">
+              <label>Upload Your Existing CV</label>
+              <div class="file-upload-wrapper large">
+                <input type="file" id="existingCV" name="existingCV" accept=".pdf,.doc,.docx">
+                <div class="file-upload-display">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"/>
+                    <path d="M12 12v6"/>
+                    <path d="m15 15-3-3-3 3"/>
+                  </svg>
+                  <span>Click to upload or drag and drop</span>
+                  <span class="file-hint">PDF, DOC, DOCX up to 4MB</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Notes -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Additional Notes</h2>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Any additional information or special requests?</label>
+              <textarea id="additionalNotes" name="additionalNotes" rows="4" placeholder="Tell us about any specific requirements, preferences, or additional information you'd like to include in your resume..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupon/Promo Code Section -->
+        <div class="form-section-group">
+          <div class="section-header">
+            <div class="section-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                <path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Have a Promo Code?</h2>
+          </div>
+          
+          <div class="coupon-section">
+            <div class="coupon-input-wrapper">
+              <div class="form-group">
+                <label for="couponCode">Enter Coupon Code</label>
+                <div class="coupon-input-group">
+                  <input 
+                    type="text" 
+                    id="couponCode" 
+                    name="couponCode" 
+                    placeholder="e.g., WELCOME25"
+                    style="text-transform: uppercase;">
+                  <button type="button" class="apply-coupon-btn" onclick="applyCoupon()">
+                    Apply
+                  </button>
+                </div>
+                <span class="coupon-hint">Enter your promo code to get a discount</span>
+              </div>
+            </div>
+            
+            <!-- Coupon Status Messages -->
+            <div id="couponStatus" class="coupon-status" style="display: none;"></div>
+            
+            <!-- Price Breakdown -->
+            <div id="priceBreakdown" class="price-breakdown">
+              <div class="price-row">
+                <span>Selected Package:</span>
+                <strong id="breakdownPackage">Professional</strong>
+              </div>
+              <div class="price-row">
+                <span>Original Price:</span>
+                <strong id="breakdownOriginal">৳1,999</strong>
+              </div>
+              <div class="price-row discount-row" id="discountRow" style="display: none;">
+                <span>Discount (<span id="discountLabel"></span>):</span>
+                <strong class="discount-amount" id="breakdownDiscount">-৳0</strong>
+              </div>
+              <div class="price-row total-row">
+                <span>Final Price:</span>
+                <strong class="final-price" id="breakdownFinal">৳1,999</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Section -->
+        <div class="form-submit-section">
+          <div class="submit-info">
+            <p>By submitting this form, you agree to our <a href="terms-of-service.html" target="_blank" rel="noopener noreferrer">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</p>
+            <p class="package-reminder">Your selected package: <strong id="submitPackageName">Professional</strong> - <strong id="submitPackagePrice">৳1,999</strong></p>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+              <path d="M22 2 11 13"/>
+              <path d="m22 2-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Submit My Information
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon success">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <h2>Thank You!</h2>
+      <p>Your information has been submitted successfully. Our team will start working on your resume and get back to you within the delivery timeframe of your selected package.</p>
+      <p style="margin-top: 0.5rem; font-weight: 500; color: var(--text-dark);">Please click the <strong style="color: var(--primary);">Confirm Order</strong> button below to finalize your order.</p>
+      <p class="modal-package">Package: <strong id="modalPackageName">Professional</strong></p>
+      <p class="modal-invoice">Invoice ID: <strong id="modalInvoiceId">-</strong></p>
+      <div class="modal-buttons">
+        <button class="modal-btn modal-btn-primary" onclick="confirmOrderWhatsApp()">Confirm Order</button>
+        <button class="modal-btn modal-btn-outline" onclick="closeModal()">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+
+<!-- ========================================== -->
+
+<!-- WhatsApp Support Widget -->
+<!-- Animated Background -->
+  <div class="background-container">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- WhatsApp Widget -->
+  <div class="whatsapp-widget" id="whatsappWidget">
+    <!-- Support Card -->
+    <div class="whatsapp-card" id="whatsappCard">
+      <!-- Header -->
+      <div class="whatsapp-header">
+        <button class="whatsapp-close-btn" onclick="toggleWidget()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M18 6L6 18M6 6l12 12"/>
+          </svg>
+        </button>
+        
+        <div class="whatsapp-header-content">
+          <div class="whatsapp-header-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="whatsapp-header-text">
+            <h3>Need Help?</h3>
+            <p>We're here to assist you!</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="whatsapp-body">
+        <!-- Info Card -->
+        <div class="whatsapp-info-card">
+          <div class="whatsapp-info-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+          </div>
+          <div class="whatsapp-info-text">
+            <h4>Support Team</h4>
+            <p>Get instant support 24/7 via WhatsApp</p>
+            
+            <div class="whatsapp-status">
+              <div class="whatsapp-online">
+                <div class="whatsapp-online-dot"></div>
+                <span>Online</span>
+              </div>
+              <div class="whatsapp-response-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>~5 min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features List -->
+        <div class="whatsapp-features">
+          <div class="whatsapp-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Instant response from our team</span>
+          </div>
+          <div class="whatsapp-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>Available 24/7 for your queries</span>
+          </div>
+          <div class="whatsapp-feature">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>No waiting on hold</span>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <button class="whatsapp-cta-btn" onclick="openWhatsApp()">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+          </svg>
+          <span>Start Chat</span>
+          <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Button -->
+    <button class="whatsapp-float-btn" id="whatsappFloatBtn" onclick="toggleWidget()">
+      <div class="whatsapp-ripple"></div>
+      <div class="whatsapp-glass-ring"></div>
+      
+      <div class="whatsapp-icon-container">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        <svg class="whatsapp-close-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </div>
+      
+      <span class="whatsapp-badge" id="whatsappBadge">!</span>
+    </button>
+
+    <!-- Tooltip -->
+    <div class="whatsapp-tooltip" id="whatsappTooltip">
+      Chat with us!
+      <div class="whatsapp-tooltip-arrow"></div>
+    </div>
+  </div>
+
+  <script src="/js/form-script.js"></script>
+  <script src="/js/country-detect.js"></script>
+  <script src="/js/script.js"></script>
+</body>
+</html>

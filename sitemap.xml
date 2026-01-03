@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- ========================================
+       TIER 1: HIGHEST PRIORITY PAGES (1.0)
+       ======================================== -->
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://draftacv.com/</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="canonical" href="https://draftacv.com/" />
+  </url>
+
+  <!-- ATS Checker Tool - PRIMARY CONVERSION PAGE -->
+  <url>
+    <loc>https://draftacv.com/cv-checker.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://draftacv.com/cv-checker.html" />
+    <xhtml:link rel="canonical" href="https://draftacv.com/cv-checker.html" />
+    <image:image>
+      <image:loc>https://draftacv.com/images/ats-checker-interface.png</image:loc>
+      <image:title>Free ATS Resume Checker Tool - Upload and Scan Your CV</image:title>
+      <image:caption>AI-powered ATS compatibility checker - Get instant feedback on your resume</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/images/ats-score-dashboard.png</image:loc>
+      <image:title>ATS Score Results Dashboard</image:title>
+      <image:caption>See your ATS compatibility score and detailed analysis</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/images/ats-recommendations.png</image:loc>
+      <image:title>ATS Optimization Recommendations</image:title>
+      <image:caption>Get personalized recommendations to improve your ATS score</image:caption>
+    </image:image>
+  </url>
+
+  <!-- ========================================
+       TIER 2: HIGH PRIORITY PAGES (0.9-0.95)
+       ======================================== -->
+
+  <!-- Main Sections - Packages (Primary CTA) -->
+  <url>
+    <loc>https://draftacv.com/index.html#packages</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <!-- Resume Samples Gallery -->
+  <url>
+    <loc>https://draftacv.com/samples.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_1.png</image:loc>
+      <image:title>ATS-Optimized Professional Resume Sample - Clean Professional</image:title>
+      <image:caption>Minimal design with clear hierarchy, ATS Score 98%</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_2.png</image:loc>
+      <image:title>Executive ATS Resume Template for Senior Positions</image:title>
+      <image:caption>Executive format resume - ATS Score 96%</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_3.png</image:loc>
+      <image:title>Modern Classic ATS-Friendly Resume Template</image:title>
+      <image:caption>Timeless ATS-compatible design - ATS Score 99%</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_4.png</image:loc>
+      <image:title>Tech Professional ATS Resume for IT &amp; Engineering</image:title>
+      <image:caption>Ideal for IT and Engineering roles - ATS Score 97%</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_5.png</image:loc>
+      <image:title>Professional ATS Resume Sample 5</image:title>
+      <image:caption>ATS-optimized resume template</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_6.png</image:loc>
+      <image:title>Professional ATS Resume Sample 6</image:title>
+      <image:caption>ATS-compatible resume design</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/image_7.png</image:loc>
+      <image:title>Professional ATS Resume Sample 7</image:title>
+      <image:caption>ATS-friendly resume format</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/non-ats/non_ats_image_1.png</image:loc>
+      <image:title>Bold Creative Non-ATS Resume Design</image:title>
+      <image:caption>Eye-catching visual resume for creative industries</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/non-ats/non_ats_image_2.png</image:loc>
+      <image:title>Modern Artistic Creative Resume Template</image:title>
+      <image:caption>Perfect for design and creative roles</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://draftacv.com/carousel/non-ats/non_ats_image_3.png</image:loc>
+      <image:title>Visual Impact Creative Resume Design</image:title>
+      <image:caption>Makes a lasting impression for creative positions</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Blog Landing Page -->
+  <url>
+    <loc>https://draftacv.com/blog.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ========================================
+       TIER 3: IMPORTANT SECTIONS (0.8-0.85)
+       ======================================== -->
+
+  <!-- Main Sections -->
+  <url>
+    <loc>https://draftacv.com/index.html#home</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/index.html#features</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/index.html#contact</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/index.html#samples</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/index.html#faq</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ========================================
+       TIER 4: BLOG POSTS (0.7-0.9)
+       ======================================== -->
+
+  <!-- HIGH PRIORITY: ATS-Related Blog Posts (0.85-0.9) -->
+  <url>
+    <loc>https://draftacv.com/blog/how-to-optimize-resume-for-ats.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://draftacv.com/blog/how-to-optimize-resume-for-ats.html" />
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/ats-friendly-resume-templates.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/resume-keywords-guide.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- MEDIUM-HIGH PRIORITY: Resume Writing Tips (0.75-0.8) -->
+  <url>
+    <loc>https://draftacv.com/blog/common-resume-mistakes-to-avoid.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/professional-summary-examples.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/resume-formats-comparison.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/action-verbs-for-resumes.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- MEDIUM PRIORITY: Career Advice (0.7-0.75) -->
+  <url>
+    <loc>https://draftacv.com/blog/career-change-resume-tips.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/entry-level-resume-guide.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/linkedin-profile-optimization.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/cover-letter-writing-tips.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/blog/job-interview-preparation.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ========================================
+       TIER 5: LEGAL PAGES (0.3)
+       ======================================== -->
+
+  <url>
+    <loc>https://draftacv.com/privacy-policy.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://draftacv.com/terms-of-service.html</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

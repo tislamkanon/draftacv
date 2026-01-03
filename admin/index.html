@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <!-- 🔒 Protection Meta Tags 🔒 -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="referrer" content="no-referrer">
+  <!-- 🔒 End Protection Meta Tags 🔒 -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Blog CMS - DraftaCV Admin</title>
+  <link rel="icon" type="image/png" href="/images/Asset 6 (2).png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/admin/cms.css">
+</head>
+<body>
+  <!-- Auth Loading Screen - Premium Redesign -->
+  <div id="auth-loading-screen" class="auth-loading-screen">
+    <div class="loading-container">
+      <div class="preloader-wrapper">
+        <!-- Outer rotating ring -->
+        <div class="preloader-ring preloader-ring-outer"></div>
+        <!-- Inner rotating ring (opposite direction) -->
+        <div class="preloader-ring preloader-ring-inner"></div>
+        <!-- Animated gradient ring -->
+        <svg class="preloader-svg" viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="preloader-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0066FF">
+                <animate attributeName="stop-color" values="#0066FF;#00C853;#8B5CF6;#F59E0B;#0066FF" dur="4s" repeatCount="indefinite"/>
+              </stop>
+              <stop offset="50%" stop-color="#00C853">
+                <animate attributeName="stop-color" values="#00C853;#8B5CF6;#F59E0B;#0066FF;#00C853" dur="4s" repeatCount="indefinite"/>
+              </stop>
+              <stop offset="100%" stop-color="#8B5CF6">
+                <animate attributeName="stop-color" values="#8B5CF6;#F59E0B;#0066FF;#00C853;#8B5CF6" dur="4s" repeatCount="indefinite"/>
+              </stop>
+            </linearGradient>
+          </defs>
+          <circle class="preloader-track" cx="60" cy="60" r="54" fill="none" stroke-width="2"/>
+          <circle class="preloader-progress" cx="60" cy="60" r="54" fill="none" stroke="url(#preloader-gradient)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <!-- Logo container -->
+        <div class="preloader-logo-container">
+          <img src="../images/Asset 6 (2).png" alt="DraftaCV" class="preloader-logo">
+          <div class="preloader-logo-glow"></div>
+        </div>
+      </div>
+      <div class="loading-text">
+        <h3>Verifying Access...</h3>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cms-container">
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMobileSidebar()"></div>
+    
+    <!-- Sidebar - Framer Style -->
+    <aside class="cms-sidebar" id="cms-sidebar">
+      <div class="sidebar-header">
+        <a href="../index.html" class="sidebar-brand">
+          <img src="../images/Asset 6 (2).png" alt="DraftaCV Logo" class="sidebar-logo-image">
+          <span class="sidebar-brand-text">DraftaCV</span>
+        </a>
+        <button class="sidebar-collapse-btn desktop-only" onclick="toggleSidebar()" title="Toggle Sidebar">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="sidebar-close-btn mobile-only" onclick="closeMobileSidebar()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <!-- CMS Section -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-label">CMS</div>
+          <button class="nav-item active" data-view="dashboard" onclick="switchView('dashboard')">
+            <i class="fas fa-th-large"></i>
+            <span class="nav-item-text">Dashboard</span>
+          </button>
+          <button class="nav-item" data-view="posts" onclick="switchView('posts')">
+            <i class="fas fa-file-alt"></i>
+            <span class="nav-item-text">All Posts</span>
+            <span class="nav-item-count" id="nav-posts-count">0</span>
+          </button>
+          
+          <!-- Collapsible Categories - Premium Style -->
+          <div class="nav-item-group">
+            <button class="nav-item nav-item-parent" onclick="toggleCategoryMenu()">
+              <i class="fas fa-folder"></i>
+              <span class="nav-item-text">Categories</span>
+              <i class="fas fa-chevron-down nav-item-arrow" id="category-arrow"></i>
+            </button>
+            <div class="nav-submenu" id="category-submenu">
+              <button class="nav-subitem" data-category="all" onclick="filterByCategory('all')">
+                <span class="category-dot all"></span>
+                <span>All</span>
+                <span class="nav-subitem-count" id="nav-cat-all">0</span>
+              </button>
+              <button class="nav-subitem" data-category="resume-tips" onclick="filterByCategory('resume-tips')">
+                <span class="category-dot resume-tips"></span>
+                <span>Resume Tips</span>
+                <span class="nav-subitem-count" id="nav-cat-resume-tips">0</span>
+              </button>
+              <button class="nav-subitem" data-category="career-advice" onclick="filterByCategory('career-advice')">
+                <span class="category-dot career-advice"></span>
+                <span>Career Advice</span>
+                <span class="nav-subitem-count" id="nav-cat-career-advice">0</span>
+              </button>
+              <button class="nav-subitem" data-category="interview-prep" onclick="filterByCategory('interview-prep')">
+                <span class="category-dot interview-prep"></span>
+                <span>Interview Prep</span>
+                <span class="nav-subitem-count" id="nav-cat-interview-prep">0</span>
+              </button>
+              <button class="nav-subitem" data-category="job-search" onclick="filterByCategory('job-search')">
+                <span class="category-dot job-search"></span>
+                <span>Job Search</span>
+                <span class="nav-subitem-count" id="nav-cat-job-search">0</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Actions Section -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-label">Actions</div>
+          <button class="nav-item nav-item-action" data-view="editor" onclick="switchView('editor'); resetEditor();">
+            <i class="fas fa-plus"></i>
+            <span class="nav-item-text">New Post</span>
+          </button>
+          <button class="nav-item nav-item-action" data-view="calendar" onclick="switchView('calendar')">
+            <i class="fas fa-calendar-alt"></i>
+            <span class="nav-item-text">Content Calendar</span>
+          </button>
+        </div>
+        
+        <!-- Management Section -->
+        <div class="sidebar-section">
+          <div class="sidebar-section-label">Management</div>
+          <div class="nav-item-group">
+            <button class="nav-item nav-item-parent" onclick="toggleCouponMenu()">
+              <i class="fas fa-ticket-alt"></i>
+              <span class="nav-item-text">Coupons</span>
+              <i class="fas fa-chevron-down nav-item-arrow" id="coupon-arrow"></i>
+            </button>
+            <div class="nav-submenu" id="coupon-submenu">
+              <button class="nav-subitem" data-view="coupons" onclick="switchView('coupons')">
+                <i class="fas fa-th-list"></i>
+                <span>All Coupons</span>
+                <span class="nav-subitem-count" id="nav-coupon-count">0</span>
+              </button>
+              <button class="nav-subitem" onclick="switchView('coupons'); openCouponModal();">
+                <i class="fas fa-plus-circle"></i>
+                <span>Create Coupon</span>
+              </button>
+              <button class="nav-subitem" data-view="coupon-analytics" onclick="switchView('coupon-analytics')">
+                <i class="fas fa-chart-bar"></i>
+                <span>Analytics</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="sidebar-user" onclick="logout()">
+          <div class="sidebar-user-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="sidebar-user-info">
+            <div class="sidebar-user-name">Admin</div>
+            <div class="sidebar-user-email" id="admin-email">admin@draftacv.com</div>
+          </div>
+          <i class="fas fa-sign-out-alt sidebar-logout-icon"></i>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="cms-main">
+      <!-- Top Header -->
+      <header class="cms-header">
+        <div class="header-left">
+          <!-- Mobile Hamburger -->
+          <button class="hamburger-btn mobile-only" onclick="openMobileSidebar()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="header-breadcrumb">
+            <a href="#" onclick="switchView('dashboard'); return false;">CMS</a>
+            <span>/</span>
+            <span class="header-title" id="header-title">Dashboard</span>
+          </div>
+        </div>
+        
+        <div class="header-right">
+          <button class="header-icon-btn desktop-only" onclick="showKeyboardShortcuts()" title="Keyboard Shortcuts (Ctrl+/)">
+            <i class="fas fa-keyboard"></i>
+          </button>
+          
+          <!-- Premium Theme Toggle -->
+          <div class="theme-toggle-wrapper">
+            <button class="theme-toggle-switch" onclick="toggleTheme()" id="theme-toggle">
+              <span class="theme-toggle-track">
+                <span class="theme-toggle-thumb" id="theme-thumb">
+                  <i class="fas fa-moon theme-icon-dark"></i>
+                  <i class="fas fa-sun theme-icon-light"></i>
+                </span>
+              </span>
+            </button>
+          </div>
+          
+          <button class="btn-publish desktop-only" onclick="switchView('editor'); resetEditor();">
+            <i class="fas fa-plus"></i>
+            <span>New Post</span>
+          </button>
+        </div>
+      </header>
+      
+      <!-- Content Area -->
+      <div class="cms-content">
+        <!-- Dashboard View -->
+        <section id="dashboard-view" class="cms-view active">
+          <div class="view-header">
+            <h1>Dashboard</h1>
+            <p>Welcome to your Blog CMS</p>
+          </div>
+          
+          <!-- Compact Stats Grid - Now Clickable Tabs -->
+          <div class="stats-row">
+            <div class="stat-card-compact stat-tab" data-filter="all" onclick="filterByStatCard('all')">
+              <div class="stat-icon-sm total">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-posts">0</div>
+                <div class="stat-label">Total Posts</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact stat-tab" data-filter="published" onclick="filterByStatCard('published')">
+              <div class="stat-icon-sm published">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="published-posts">0</div>
+                <div class="stat-label">Published</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact stat-tab" data-filter="draft" onclick="filterByStatCard('draft')">
+              <div class="stat-icon-sm draft">
+                <i class="fas fa-edit"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="draft-posts">0</div>
+                <div class="stat-label">Drafts</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact stat-tab" data-filter="featured" onclick="filterByStatCard('featured')">
+              <div class="stat-icon-sm featured">
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="featured-posts">0</div>
+                <div class="stat-label">Featured</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recent Posts Widget -->
+          <div class="widget full-width">
+            <div class="widget-header">
+              <h3 class="widget-title">Recent Posts</h3>
+              <button class="widget-action" onclick="switchView('posts')">View all →</button>
+            </div>
+            <div class="widget-content">
+              <div class="recent-posts" id="recent-posts">
+                <div class="empty-state">
+                  <div class="empty-state-icon">
+                    <i class="fas fa-file-alt"></i>
+                  </div>
+                  <h3>No posts yet</h3>
+                  <p>Create your first blog post to get started</p>
+                  <button class="btn btn-primary" onclick="switchView('editor'); resetEditor();">
+                    <i class="fas fa-plus"></i>
+                    Create Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Posts List View with New Table Design -->
+        <section id="posts-view" class="cms-view">
+          <div class="view-header">
+            <h1>All Articles</h1>
+            <p>Manage your blog content</p>
+          </div>
+          
+          <!-- Batch Actions Bar -->
+          <div class="batch-actions-bar" id="batch-actions-bar" style="display: none;">
+            <div class="batch-selected-count">
+              <span id="selected-count">0</span> selected
+            </div>
+            <div class="batch-action-btns">
+              <button class="batch-btn" onclick="batchUpdateStatus('published')">
+                <i class="fas fa-check-circle"></i>
+                Publish
+              </button>
+              <button class="batch-btn" onclick="batchUpdateStatus('draft')">
+                <i class="fas fa-file-alt"></i>
+                Draft
+              </button>
+              <button class="batch-btn" onclick="batchUpdateStatus('pending')">
+                <i class="fas fa-clock"></i>
+                Pending Review
+              </button>
+              <button class="batch-btn batch-btn-danger" onclick="batchDelete()">
+                <i class="fas fa-trash"></i>
+                Delete
+              </button>
+              <button class="batch-btn batch-btn-clear" onclick="clearBatchSelection()">
+                <i class="fas fa-times"></i>
+                Clear
+              </button>
+            </div>
+          </div>
+          
+          <div class="posts-toolbar">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="posts-search" placeholder="Search posts..." oninput="filterPosts()">
+            </div>
+            <div class="toolbar-filters">
+              <!-- Custom Status Filter Dropdown -->
+              <div class="custom-filter-dropdown" id="status-filter-dropdown">
+                <button class="custom-filter-btn" onclick="toggleFilterDropdown('status')">
+                  <i class="fas fa-filter filter-icon"></i>
+                  <span class="filter-value" id="status-filter-value">All Status</span>
+                  <i class="fas fa-chevron-down filter-arrow"></i>
+                </button>
+                <div class="custom-filter-menu" id="status-filter-menu">
+                  <button class="filter-option active" data-value="all" onclick="selectStatusFilter('all')">
+                    <i class="fas fa-layer-group"></i>
+                    <span>All Status</span>
+                  </button>
+                  <button class="filter-option" data-value="published" onclick="selectStatusFilter('published')">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Published</span>
+                  </button>
+                  <button class="filter-option" data-value="draft" onclick="selectStatusFilter('draft')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Drafts</span>
+                  </button>
+                  <button class="filter-option" data-value="pending" onclick="selectStatusFilter('pending')">
+                    <i class="fas fa-clock"></i>
+                    <span>Pending Review</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" id="posts-filter" value="all">
+              
+              <!-- Custom Category Filter Dropdown -->
+              <div class="custom-filter-dropdown" id="category-filter-dropdown">
+                <button class="custom-filter-btn" onclick="toggleFilterDropdown('category')">
+                  <i class="fas fa-folder filter-icon"></i>
+                  <span class="filter-value" id="category-filter-value">All Categories</span>
+                  <i class="fas fa-chevron-down filter-arrow"></i>
+                </button>
+                <div class="custom-filter-menu" id="category-filter-menu">
+                  <button class="filter-option active" data-value="all" onclick="selectCategoryFilter('all')">
+                    <i class="fas fa-th-large"></i>
+                    <span>All Categories</span>
+                  </button>
+                  <button class="filter-option" data-value="resume-tips" onclick="selectCategoryFilter('resume-tips')">
+                    <span class="category-dot resume-tips"></span>
+                    <span>Resume Tips</span>
+                  </button>
+                  <button class="filter-option" data-value="career-advice" onclick="selectCategoryFilter('career-advice')">
+                    <span class="category-dot career-advice"></span>
+                    <span>Career Advice</span>
+                  </button>
+                  <button class="filter-option" data-value="interview-prep" onclick="selectCategoryFilter('interview-prep')">
+                    <span class="category-dot interview-prep"></span>
+                    <span>Interview Prep</span>
+                  </button>
+                  <button class="filter-option" data-value="job-search" onclick="selectCategoryFilter('job-search')">
+                    <span class="category-dot job-search"></span>
+                    <span>Job Search</span>
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" id="category-filter" value="all">
+              
+              <button class="btn btn-primary" onclick="switchView('editor'); resetEditor();">
+                <i class="fas fa-plus"></i>
+                New Post
+              </button>
+            </div>
+          </div>
+          
+          <!-- Desktop Table with New Columns -->
+          <div class="posts-table-container">
+            <table class="posts-table">
+              <thead>
+                <tr>
+                  <th class="th-checkbox">
+                    <label class="table-checkbox">
+                      <input type="checkbox" id="select-all-posts" onchange="toggleSelectAll()">
+                      <span class="checkbox-custom"></span>
+                    </label>
+                  </th>
+                  <th class="sortable th-title" onclick="openSortMenu(event, 'title')">
+                    Title
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-title">
+                      <button onclick="sortPosts('title', 'asc')"><i class="fas fa-sort-alpha-down"></i> A - Z</button>
+                      <button onclick="sortPosts('title', 'desc')"><i class="fas fa-sort-alpha-up"></i> Z - A</button>
+                    </div>
+                  </th>
+                  <th>Image</th>
+                  <th class="sortable" onclick="openSortMenu(event, 'date')">
+                    Date Created
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-date">
+                      <button onclick="sortPosts('date', 'desc')"><i class="fas fa-sort-amount-down"></i> Newest First</button>
+                      <button onclick="sortPosts('date', 'asc')"><i class="fas fa-sort-amount-up"></i> Oldest First</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openSortMenu(event, 'category')">
+                    Category
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-category">
+                      <button onclick="sortPosts('category', 'asc')"><i class="fas fa-sort-alpha-down"></i> A - Z</button>
+                      <button onclick="sortPosts('category', 'desc')"><i class="fas fa-sort-alpha-up"></i> Z - A</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openSortMenu(event, 'featured')">
+                    Featured
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-featured">
+                      <button onclick="sortPosts('featured', 'desc')"><i class="fas fa-star"></i> Featured First</button>
+                      <button onclick="sortPosts('featured', 'asc')"><i class="fas fa-star-half-alt"></i> Non-Featured First</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openSortMenu(event, 'edited')">
+                    Edited
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-edited">
+                      <button onclick="sortPosts('edited', 'desc')"><i class="fas fa-sort-amount-down"></i> Recent First</button>
+                      <button onclick="sortPosts('edited', 'asc')"><i class="fas fa-sort-amount-up"></i> Oldest First</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openSortMenu(event, 'status')">
+                    Status
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="sort-dropdown-status">
+                      <button onclick="sortPosts('status', 'desc')"><i class="fas fa-check-circle"></i> Published First</button>
+                      <button onclick="sortPosts('status', 'asc')"><i class="fas fa-file-alt"></i> Drafts First</button>
+                    </div>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="posts-table-body">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+            
+            <!-- Mobile Cards Grid -->
+            <div class="mobile-posts-grid" id="mobile-posts-grid">
+              <!-- Populated by JS -->
+            </div>
+            
+            <div class="empty-state" id="posts-empty" style="display: none;">
+              <div class="empty-state-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <h3>No posts yet</h3>
+              <p>Create your first blog post to get started</p>
+              <button class="btn btn-primary" onclick="switchView('editor'); resetEditor();">
+                <i class="fas fa-plus"></i>
+                Create Post
+              </button>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Editor View -->
+        <section id="editor-view" class="cms-view">
+          <div class="editor-container">
+            <div class="editor-header">
+              <div class="editor-title-section">
+                <button class="back-btn" onclick="switchView('posts')" title="Back to Posts">
+                  <i class="fas fa-arrow-left"></i>
+                </button>
+                <span id="editor-mode-label">New Post</span>
+                <span class="auto-draft-indicator" id="auto-draft-indicator" style="display: none;">
+                  <i class="fas fa-cloud"></i>
+                  <span>Auto-saved</span>
+                </span>
+              </div>
+              <div class="editor-actions">
+                <button class="btn btn-secondary" onclick="saveDraft()" title="Save Draft (Ctrl+S)">
+                  <i class="fas fa-save"></i>
+                  Save Draft
+                </button>
+                <button class="btn btn-primary" onclick="publishPost()" title="Publish (Ctrl+Enter)">
+                  <i class="fas fa-paper-plane"></i>
+                  Publish
+                </button>
+              </div>
+            </div>
+            
+            <div class="editor-body">
+              <div class="editor-main">
+                <input type="text" id="post-title" class="title-input" placeholder="Enter post title...">
+                
+                <textarea id="post-excerpt" class="excerpt-input" placeholder="Write a short excerpt/summary (displayed in blog cards)..." rows="3"></textarea>
+                
+                <!-- Rich Text Editor Toolbar with Active States -->
+                <div class="editor-toolbar" id="editor-toolbar">
+                  <div class="toolbar-group">
+                    <button type="button" data-command="bold" onclick="execCommand('bold')" title="Bold (Ctrl+B)">
+                      <i class="fas fa-bold"></i>
+                    </button>
+                    <button type="button" data-command="italic" onclick="execCommand('italic')" title="Italic (Ctrl+I)">
+                      <i class="fas fa-italic"></i>
+                    </button>
+                    <button type="button" data-command="underline" onclick="execCommand('underline')" title="Underline (Ctrl+U)">
+                      <i class="fas fa-underline"></i>
+                    </button>
+                    <button type="button" data-command="strikeThrough" onclick="execCommand('strikeThrough')" title="Strikethrough">
+                      <i class="fas fa-strikethrough"></i>
+                    </button>
+                  </div>
+                  <div class="toolbar-divider"></div>
+                  <div class="toolbar-group">
+                    <button type="button" onclick="execCommand('formatBlock', 'h2')" title="Heading 2 (Ctrl+2)">
+                      <span class="text-btn">H2</span>
+                    </button>
+                    <button type="button" onclick="execCommand('formatBlock', 'h3')" title="Heading 3 (Ctrl+3)">
+                      <span class="text-btn">H3</span>
+                    </button>
+                    <button type="button" onclick="execCommand('formatBlock', 'h4')" title="Heading 4 (Ctrl+4)">
+                      <span class="text-btn">H4</span>
+                    </button>
+                    <button type="button" onclick="execCommand('formatBlock', 'p')" title="Paragraph (Ctrl+0)">
+                      <i class="fas fa-paragraph"></i>
+                    </button>
+                  </div>
+                  <div class="toolbar-divider"></div>
+                  <div class="toolbar-group">
+                    <button type="button" data-command="insertUnorderedList" onclick="execCommand('insertUnorderedList')" title="Bullet List (Ctrl+Shift+U)">
+                      <i class="fas fa-list-ul"></i>
+                    </button>
+                    <button type="button" data-command="insertOrderedList" onclick="execCommand('insertOrderedList')" title="Numbered List (Ctrl+Shift+O)">
+                      <i class="fas fa-list-ol"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('indent')" title="Indent (Tab)">
+                      <i class="fas fa-indent"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('outdent')" title="Outdent (Shift+Tab)">
+                      <i class="fas fa-outdent"></i>
+                    </button>
+                  </div>
+                  <div class="toolbar-divider"></div>
+                  <div class="toolbar-group">
+                    <button type="button" onclick="execCommand('justifyLeft')" title="Align Left (Ctrl+Shift+L)" data-command="justifyLeft">
+                      <i class="fas fa-align-left"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('justifyCenter')" title="Align Center (Ctrl+Shift+E)" data-command="justifyCenter">
+                      <i class="fas fa-align-center"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('justifyRight')" title="Align Right (Ctrl+Shift+R)" data-command="justifyRight">
+                      <i class="fas fa-align-right"></i>
+                    </button>
+                  </div>
+                  <div class="toolbar-divider"></div>
+                  <div class="toolbar-group">
+                    <button type="button" onclick="insertLink()" title="Insert Link (Ctrl+K)">
+                      <i class="fas fa-link"></i>
+                    </button>
+                    <button type="button" onclick="insertImage()" title="Insert Image (Ctrl+Shift+I)">
+                      <i class="fas fa-image"></i>
+                    </button>
+                    <button type="button" onclick="insertYouTube()" title="Insert YouTube Video">
+                      <i class="fab fa-youtube"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('formatBlock', 'blockquote')" title="Quote (Ctrl+Shift+Q)">
+                      <i class="fas fa-quote-left"></i>
+                    </button>
+                    <button type="button" onclick="insertCodeBlock()" title="Code Block (Ctrl+Shift+C)">
+                      <i class="fas fa-code"></i>
+                    </button>
+                  </div>
+                  <div class="toolbar-divider"></div>
+                  <div class="toolbar-group">
+                    <button type="button" onclick="clearFormatting()" title="Clear Formatting (Ctrl+\\)">
+                      <i class="fas fa-eraser"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('undo')" title="Undo (Ctrl+Z)">
+                      <i class="fas fa-undo"></i>
+                    </button>
+                    <button type="button" onclick="execCommand('redo')" title="Redo (Ctrl+Y)">
+                      <i class="fas fa-redo"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Editor Content with Fixed Height and Scroll -->
+                <div class="editor-content-wrapper">
+                  <div id="post-content" class="editor-content" contenteditable="true" placeholder="Start writing your blog post content here..."></div>
+                </div>
+              </div>
+              
+              <!-- Editor Sidebar -->
+              <div class="editor-sidebar">
+                <!-- Featured Image -->
+                <div class="sidebar-card">
+                  <h3>Featured Image</h3>
+                  <div class="featured-image-upload">
+                    <div id="featured-image-preview" class="image-preview" onclick="setFeaturedImage()">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                      <span>Click to add image</span>
+                    </div>
+                    <input type="hidden" id="featured-image-url">
+                    <button class="btn btn-secondary btn-sm" onclick="setFeaturedImage()">
+                      <i class="fas fa-link"></i>
+                      Set Image URL
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Category - Expandable Menu Style -->
+                <div class="sidebar-card">
+                  <h3>Category</h3>
+                  <div class="category-selector" id="category-selector">
+                    <button type="button" class="category-selector-btn" onclick="toggleCategorySelector()">
+                      <span class="category-selector-value" id="category-selector-value">Select category</span>
+                      <i class="fas fa-chevron-down category-selector-arrow"></i>
+                    </button>
+                    <div class="category-selector-dropdown" id="category-selector-dropdown">
+                      <button type="button" class="category-option" data-value="resume-tips" onclick="selectCategory('resume-tips')">
+                        <span class="category-dot resume-tips"></span>
+                        <span>Resume Tips</span>
+                      </button>
+                      <button type="button" class="category-option" data-value="career-advice" onclick="selectCategory('career-advice')">
+                        <span class="category-dot career-advice"></span>
+                        <span>Career Advice</span>
+                      </button>
+                      <button type="button" class="category-option" data-value="interview-prep" onclick="selectCategory('interview-prep')">
+                        <span class="category-dot interview-prep"></span>
+                        <span>Interview Prep</span>
+                      </button>
+                      <button type="button" class="category-option" data-value="job-search" onclick="selectCategory('job-search')">
+                        <span class="category-dot job-search"></span>
+                        <span>Job Search</span>
+                      </button>
+                    </div>
+                  </div>
+                  <input type="hidden" id="post-category" value="">
+                </div>
+                
+                <!-- Read Time with Auto Calculation -->
+                <div class="sidebar-card">
+                  <h3>Read Time</h3>
+                  <div class="read-time-wrapper">
+                    <div class="read-time-auto">
+                      <label class="toggle-label">
+                        <input type="checkbox" id="auto-read-time" checked onchange="toggleAutoReadTime()">
+                        <span class="toggle-switch"></span>
+                        <span>Auto-calculate</span>
+                      </label>
+                    </div>
+                    <div class="read-time-input">
+                      <input type="number" id="post-read-time" min="1" value="5">
+                      <span>min read</span>
+                    </div>
+                    <div class="read-time-info" id="read-time-info">
+                      <span id="word-count-display">0 words</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Featured Post -->
+                <div class="sidebar-card">
+                  <h3>Featured Post</h3>
+                  <label class="toggle-label">
+                    <input type="checkbox" id="post-featured">
+                    <span class="toggle-switch"></span>
+                    <span>Mark as featured</span>
+                  </label>
+                </div>
+                
+                <!-- Publish Date -->
+                <div class="sidebar-card">
+                  <h3>Publish Date</h3>
+                  <div class="datetime-picker-wrapper">
+                    <input type="datetime-local" id="post-date">
+                  </div>
+                </div>
+                
+                <!-- Author -->
+                <div class="sidebar-card">
+                  <h3>Author</h3>
+                  <input type="text" id="post-author" placeholder="Author name" value="DraftaCV Team">
+                </div>
+                
+                <!-- SEO Meta Description -->
+                <div class="sidebar-card">
+                  <h3>Meta Description</h3>
+                  <textarea id="post-meta" placeholder="SEO meta description..." rows="3"></textarea>
+                  <span class="char-count"><span id="meta-char-count">0</span>/160</span>
+                </div>
+                
+                <!-- Tags -->
+                <div class="sidebar-card">
+                  <h3>Tags</h3>
+                  <input type="text" id="post-tags" placeholder="Add tags separated by commas">
+                </div>
+                
+                <!-- Delete Post -->
+                <div class="sidebar-card danger" id="delete-card" style="display: none;">
+                  <button class="btn btn-danger" onclick="deleteCurrentPost()" style="width: 100%;">
+                    <i class="fas fa-trash"></i>
+                    Delete Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Categories View -->
+        <section id="categories-view" class="cms-view">
+          <div class="view-header">
+            <h1>Categories</h1>
+            <p>Manage your blog categories</p>
+          </div>
+          
+          <div class="categories-grid">
+            <div class="category-card" onclick="filterByCategory('resume-tips')">
+              <div class="category-icon resume-tips">
+                <i class="fas fa-file-alt"></i>
+              </div>
+              <h3>Resume Tips</h3>
+              <span class="category-count" id="cat-resume-tips">0 posts</span>
+              <p>Tips for creating effective resumes</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('career-advice')">
+              <div class="category-icon career-advice">
+                <i class="fas fa-briefcase"></i>
+              </div>
+              <h3>Career Advice</h3>
+              <span class="category-count" id="cat-career-advice">0 posts</span>
+              <p>General career guidance and strategies</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('interview-prep')">
+              <div class="category-icon interview-prep">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h3>Interview Prep</h3>
+              <span class="category-count" id="cat-interview-prep">0 posts</span>
+              <p>Interview preparation and techniques</p>
+            </div>
+            <div class="category-card" onclick="filterByCategory('job-search')">
+              <div class="category-icon job-search">
+                <i class="fas fa-search"></i>
+              </div>
+              <h3>Job Search</h3>
+              <span class="category-count" id="cat-job-search">0 posts</span>
+              <p>Job hunting strategies and resources</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Content Calendar View -->
+        <section id="calendar-view" class="cms-view">
+          <div class="view-header">
+            <div class="view-header-row">
+              <div>
+                <h1>Content Calendar</h1>
+                <p>Plan and schedule your content</p>
+              </div>
+              <button class="btn btn-primary" onclick="openCalendarTaskModal()">
+                <i class="fas fa-plus"></i>
+                Add Task
+              </button>
+            </div>
+          </div>
+          
+          <div class="calendar-container">
+            <div class="calendar-header">
+              <button class="calendar-nav-btn" onclick="changeMonth(-1)">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <h2 id="calendar-month-year">December 2024</h2>
+              <button class="calendar-nav-btn" onclick="changeMonth(1)">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <button class="btn btn-secondary" onclick="goToToday()">Today</button>
+            </div>
+            
+            <div class="calendar-grid">
+              <div class="calendar-weekdays">
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tue</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thu</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+              </div>
+              <div class="calendar-days" id="calendar-days">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Upcoming Tasks -->
+          <div class="calendar-tasks">
+            <h3>Upcoming Tasks</h3>
+            <div class="tasks-list" id="calendar-tasks-list">
+              <div class="empty-state small">
+                <i class="fas fa-tasks"></i>
+                <p>No tasks scheduled</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Coupon Management View -->
+        <section id="coupons-view" class="cms-view">
+          <div class="view-header">
+            <div class="view-header-row">
+              <div>
+                <h1>Coupon Management</h1>
+                <p>Manage discount coupons and promotions</p>
+              </div>
+              <button class="btn btn-primary" onclick="openCouponModal()">
+                <i class="fas fa-plus"></i>
+                Create Coupon
+              </button>
+            </div>
+          </div>
+          
+          <!-- Coupon Stats Cards -->
+          <div class="stats-row coupon-stats">
+            <div class="stat-card-compact stat-tab" data-coupon-filter="all" onclick="filterCouponsByStatus('all')">
+              <div class="stat-icon-sm coupon-total">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-coupons">0</div>
+                <div class="stat-label">Total Coupons</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact stat-tab" data-coupon-filter="active" onclick="filterCouponsByStatus('active')">
+              <div class="stat-icon-sm coupon-active">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="active-coupons">0</div>
+                <div class="stat-label">Active Coupons</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact stat-tab" data-coupon-filter="expired" onclick="filterCouponsByStatus('expired')">
+              <div class="stat-icon-sm coupon-expired">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="expired-coupons">0</div>
+                <div class="stat-label">Expired</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact">
+              <div class="stat-icon-sm coupon-usage">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="total-coupon-usage">0</div>
+                <div class="stat-label">Total Uses</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Coupon Toolbar -->
+          <div class="posts-toolbar coupon-toolbar">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" id="coupon-search" placeholder="Search coupons..." oninput="filterCoupons()">
+            </div>
+            <div class="toolbar-filters">
+              <!-- Status Filter -->
+              <div class="custom-filter-dropdown" id="coupon-status-filter-dropdown">
+                <button class="custom-filter-btn" onclick="toggleCouponFilterDropdown('status')">
+                  <i class="fas fa-filter filter-icon"></i>
+                  <span class="filter-value" id="coupon-status-filter-value">All Status</span>
+                  <i class="fas fa-chevron-down filter-arrow"></i>
+                </button>
+                <div class="custom-filter-menu" id="coupon-status-filter-menu">
+                  <button class="filter-option active" data-value="all" onclick="selectCouponStatusFilter('all')">
+                    <i class="fas fa-layer-group"></i>
+                    <span>All Status</span>
+                  </button>
+                  <button class="filter-option" data-value="active" onclick="selectCouponStatusFilter('active')">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Active</span>
+                  </button>
+                  <button class="filter-option" data-value="inactive" onclick="selectCouponStatusFilter('inactive')">
+                    <i class="fas fa-pause-circle"></i>
+                    <span>Inactive</span>
+                  </button>
+                  <button class="filter-option" data-value="expired" onclick="selectCouponStatusFilter('expired')">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Expired</span>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Package Filter -->
+              <div class="custom-filter-dropdown" id="coupon-package-filter-dropdown">
+                <button class="custom-filter-btn" onclick="toggleCouponFilterDropdown('package')">
+                  <i class="fas fa-box filter-icon"></i>
+                  <span class="filter-value" id="coupon-package-filter-value">All Packages</span>
+                  <i class="fas fa-chevron-down filter-arrow"></i>
+                </button>
+                <div class="custom-filter-menu" id="coupon-package-filter-menu">
+                  <button class="filter-option active" data-value="all" onclick="selectCouponPackageFilter('all')">
+                    <i class="fas fa-th-large"></i>
+                    <span>All Packages</span>
+                  </button>
+                  <button class="filter-option" data-value="basic" onclick="selectCouponPackageFilter('basic')">
+                    <span class="package-dot basic"></span>
+                    <span>Basic</span>
+                  </button>
+                  <button class="filter-option" data-value="professional" onclick="selectCouponPackageFilter('professional')">
+                    <span class="package-dot professional"></span>
+                    <span>Professional</span>
+                  </button>
+                  <button class="filter-option" data-value="executive" onclick="selectCouponPackageFilter('executive')">
+                    <span class="package-dot executive"></span>
+                    <span>Executive</span>
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Country Filter -->
+              <div class="custom-filter-dropdown" id="coupon-country-filter-dropdown">
+                <button class="custom-filter-btn" onclick="toggleCouponFilterDropdown('country')">
+                  <i class="fas fa-globe filter-icon"></i>
+                  <span class="filter-value" id="coupon-country-filter-value">All Countries</span>
+                  <i class="fas fa-chevron-down filter-arrow"></i>
+                </button>
+                <div class="custom-filter-menu" id="coupon-country-filter-menu">
+                  <button class="filter-option active" data-value="all" onclick="selectCouponCountryFilter('all')">
+                    <i class="fas fa-globe"></i>
+                    <span>All Countries</span>
+                  </button>
+                  <button class="filter-option" data-value="BD" onclick="selectCouponCountryFilter('BD')">
+                    <span class="country-flag">🇧🇩</span>
+                    <span>Bangladesh</span>
+                  </button>
+                  <button class="filter-option" data-value="ID" onclick="selectCouponCountryFilter('ID')">
+                    <span class="country-flag">🇮🇩</span>
+                    <span>Indonesia</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Coupons Table Container -->
+          <div class="posts-table-container coupons-table-container">
+            <table class="posts-table coupons-table">
+              <thead>
+                <tr>
+                  <th class="sortable th-code" onclick="openCouponSortMenu(event, 'code')">
+                    Code
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-code">
+                      <button onclick="sortCoupons('code', 'asc')"><i class="fas fa-sort-alpha-down"></i> A - Z</button>
+                      <button onclick="sortCoupons('code', 'desc')"><i class="fas fa-sort-alpha-up"></i> Z - A</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'type')">
+                    Type
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-type">
+                      <button onclick="sortCoupons('type', 'asc')"><i class="fas fa-percent"></i> Percentage First</button>
+                      <button onclick="sortCoupons('type', 'desc')"><i class="fas fa-dollar-sign"></i> Fixed First</button>
+                    </div>
+                  </th>
+                  <th>Discount</th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'valid_for')">
+                    Valid For
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-valid_for">
+                      <button onclick="sortCoupons('valid_for', 'asc')"><i class="fas fa-globe"></i>ALL</button>
+                      <button onclick="sortCoupons('valid_for', 'asc')"><i class="country-flag">🇧🇩</span></i>BD</button>
+                      <button onclick="sortCoupons('valid_for', 'desc')"><i class="country-flag">🇮🇩</span></i>ID</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'usage')">
+                    Uses
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-usage">
+                      <button onclick="sortCoupons('usage', 'desc')"><i class="fas fa-sort-amount-down"></i> Most Used</button>
+                      <button onclick="sortCoupons('usage', 'asc')"><i class="fas fa-sort-amount-up"></i> Least Used</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'status')">
+                    Status
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-status">
+                      <button onclick="sortCoupons('status', 'asc')"><i class="fas fa-check-circle"></i> Active First</button>
+                      <button onclick="sortCoupons('status', 'desc')"><i class="fas fa-pause-circle"></i> Inactive First</button>
+                    </div>
+                  </th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'createdDate')">
+                      Created
+                      <i class="fas fa-sort sort-icon"></i>
+                      <div class="sort-dropdown" id="coupon-sort-dropdown-createdDate">
+                        <button onclick="sortCoupons('createdDate', 'desc')"><i class="fas fa-sort-amount-down"></i> Newest First</button>
+                        <button onclick="sortCoupons('createdDate', 'asc')"><i class="fas fa-sort-amount-up"></i> Oldest First</button>
+                      </div>
+                    </th>
+                  <th class="sortable" onclick="openCouponSortMenu(event, 'expiry')">
+                    Expires
+                    <i class="fas fa-sort sort-icon"></i>
+                    <div class="sort-dropdown" id="coupon-sort-dropdown-expiry">
+                      <button onclick="sortCoupons('expiry', 'asc')"><i class="fas fa-sort-amount-up"></i> Soonest First</button>
+                      <button onclick="sortCoupons('expiry', 'desc')"><i class="fas fa-sort-amount-down"></i> Latest First</button>
+                    </div>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="coupons-table-body">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+            
+            <!-- Mobile Coupon Cards -->
+            <div class="mobile-coupons-grid" id="mobile-coupons-grid">
+              <!-- Populated by JS -->
+            </div>
+            
+            <div class="empty-state" id="coupons-empty" style="display: none;">
+              <div class="empty-state-icon">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <h3>No coupons yet</h3>
+              <p>Create your first coupon to offer discounts</p>
+              <button class="btn btn-primary" onclick="openCouponModal()">
+                <i class="fas fa-plus"></i>
+                Create Coupon
+              </button>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Coupon Analytics View -->
+        <section id="coupon-analytics-view" class="cms-view">
+          <div class="view-header">
+            <div class="view-header-row">
+              <div>
+                <h1>Coupon Analytics</h1>
+                <p>Track coupon performance and usage statistics</p>
+              </div>
+              <div class="analytics-actions">
+                <button class="btn btn-secondary" onclick="exportCouponCSV()">
+                  <i class="fas fa-file-csv"></i>
+                  Export CSV
+                </button>
+                <button class="btn btn-secondary" onclick="exportCouponPDF()">
+                  <i class="fas fa-file-pdf"></i>
+                  Export PDF
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Analytics Coupon Selector -->
+          <div class="analytics-selector">
+            <label>Select Coupon:</label>
+            <div class="custom-filter-dropdown" id="analytics-coupon-dropdown">
+              <button class="custom-filter-btn" onclick="toggleAnalyticsCouponDropdown()">
+                <i class="fas fa-ticket-alt filter-icon"></i>
+                <span class="filter-value" id="analytics-coupon-value">All Coupons</span>
+                <i class="fas fa-chevron-down filter-arrow"></i>
+              </button>
+              <div class="custom-filter-menu" id="analytics-coupon-menu">
+                <button class="filter-option active" data-value="all" onclick="selectAnalyticsCoupon('all')">
+                  <i class="fas fa-layer-group"></i>
+                  <span>All Coupons</span>
+                </button>
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Analytics Summary Cards -->
+          <div class="stats-row analytics-stats">
+            <div class="stat-card-compact">
+              <div class="stat-icon-sm analytics-uses">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="analytics-total-uses">0</div>
+                <div class="stat-label">Total Uses</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact">
+              <div class="stat-icon-sm analytics-discount">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="analytics-total-discount">$0</div>
+                <div class="stat-label">Total Discount Given</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact">
+              <div class="stat-icon-sm analytics-avg">
+                <i class="fas fa-calculator"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="analytics-avg-discount">$0</div>
+                <div class="stat-label">Avg. Discount</div>
+              </div>
+            </div>
+            
+            <div class="stat-card-compact">
+              <div class="stat-icon-sm analytics-conversion">
+                <i class="fas fa-percentage"></i>
+              </div>
+              <div class="stat-info">
+                <div class="stat-value" id="analytics-conversion-rate">0%</div>
+                <div class="stat-label">Conversion Rate</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Analytics Charts -->
+          <div class="analytics-charts">
+            <div class="analytics-chart-container">
+              <h3><i class="fas fa-chart-line"></i> Usage Over Time (Last 30 Days)</h3>
+              <div class="chart-wrapper">
+                <canvas id="usage-chart"></canvas>
+              </div>
+            </div>
+            
+            <div class="analytics-row">
+              <div class="analytics-chart-container half">
+                <h3><i class="fas fa-box"></i> Package Breakdown</h3>
+                <div class="chart-wrapper">
+                  <canvas id="package-chart"></canvas>
+                </div>
+              </div>
+              
+              <div class="analytics-chart-container half">
+                <h3><i class="fas fa-globe"></i> Country Distribution</h3>
+                <div class="chart-wrapper">
+                  <canvas id="country-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Recent Usage Table -->
+          <div class="widget full-width recent-usage-widget">
+            <div class="widget-header">
+              <h3 class="widget-title">Recent Coupon Usage (Last 10)</h3>
+              <button class="widget-action" onclick="showAllUsage()">View all →</button>
+            </div>
+            <div class="widget-content">
+              <div class="usage-table-container">
+                <table class="posts-table usage-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Customer</th>
+                      <th>Coupon</th>
+                      <th>Package</th>
+                      <th>Country</th>
+                      <th>Discount</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-usage-body">
+                    <!-- Populated by JS -->
+                  </tbody>
+                </table>
+              </div>
+              <div class="empty-state small" id="usage-empty" style="display: none;">
+                <i class="fas fa-history"></i>
+                <p>No coupon usage yet</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    
+    <!-- Slide-in Editor Panel -->
+    <div class="slide-panel" id="slide-panel">
+      <div class="slide-panel-header">
+        <div class="slide-panel-title">
+          <span id="slide-panel-title">Edit Post</span>
+        </div>
+        <div class="slide-panel-actions">
+          <button class="slide-panel-btn" onclick="togglePanelFullscreen()" title="Toggle Fullscreen">
+            <i class="fas fa-expand" id="panel-fullscreen-icon"></i>
+          </button>
+          <button class="slide-panel-btn" onclick="closeSlidePanel()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+      <div class="slide-panel-content" id="slide-panel-content">
+        <!-- Content loaded dynamically -->
+      </div>
+    </div>
+    <div class="slide-panel-overlay" id="slide-panel-overlay" onclick="closeSlidePanel()"></div>
+  </div>
+  
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" data-view="dashboard" onclick="switchView('dashboard')">
+      <i class="fas fa-th-large"></i>
+      <span>Dashboard</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="posts" onclick="switchView('posts')">
+      <i class="fas fa-file-alt"></i>
+      <span>Posts</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="editor" onclick="switchView('editor'); resetEditor();">
+      <i class="fas fa-plus-circle"></i>
+      <span>New</span>
+    </button>
+    <button class="mobile-nav-btn" data-view="calendar" onclick="switchView('calendar')">
+      <i class="fas fa-calendar-alt"></i>
+      <span>Calendar</span>
+    </button>
+  </nav>
+  
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toast-container"></div>
+  
+  <!-- Keyboard Shortcuts Panel - Updated for Windows -->
+  <div class="shortcuts-panel" id="shortcuts-panel">
+    <div class="shortcuts-panel-header">
+      <h3><i class="fas fa-keyboard"></i> Keyboard Shortcuts</h3>
+      <button class="shortcuts-close" onclick="hideKeyboardShortcuts()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="shortcuts-list">
+      <div class="shortcuts-section">
+        <h4>General</h4>
+        <div class="shortcut-item">
+          <span class="shortcut-label">New Post</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">N</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Save Draft</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">S</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Publish</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">Enter</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Shortcuts</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">/</span>
+          </div>
+        </div>
+      </div>
+      <div class="shortcuts-section">
+        <h4>Formatting</h4>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Bold</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">B</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Italic</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">I</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Underline</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">U</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Insert Link</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">K</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Clear Formatting</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">\</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Align Left</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">Shift</span>
+            <span class="shortcut-key">L</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Align Center</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">Shift</span>
+            <span class="shortcut-key">E</span>
+          </div>
+        </div>
+        <div class="shortcut-item">
+          <span class="shortcut-label">Align Right</span>
+          <div class="shortcut-keys">
+            <span class="shortcut-key">Ctrl</span>
+            <span class="shortcut-key">Shift</span>
+            <span class="shortcut-key">R</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Image URL Modal -->
+  <div class="modal" id="image-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Insert Image</h2>
+        <button class="modal-close" onclick="closeModal('image-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>Image URL</label>
+        <input type="url" id="modal-image-url" placeholder="https://example.com/image.jpg">
+        <label>Alt Text (optional)</label>
+        <input type="text" id="modal-image-alt" placeholder="Describe the image">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('image-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmInsertImage()">Insert Image</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Link Modal -->
+  <div class="modal" id="link-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Insert Link</h2>
+        <button class="modal-close" onclick="closeModal('link-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>URL</label>
+        <input type="url" id="modal-link-url" placeholder="https://example.com">
+        <label>Link Text (optional)</label>
+        <input type="text" id="modal-link-text" placeholder="Click here">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('link-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmInsertLink()">Insert Link</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- YouTube Modal -->
+  <div class="modal" id="youtube-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Insert YouTube Video</h2>
+        <button class="modal-close" onclick="closeModal('youtube-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>YouTube Video URL</label>
+        <input type="url" id="modal-youtube-url" placeholder="https://www.youtube.com/watch?v=...">
+        <p class="input-hint">Paste a YouTube video URL to embed it in your post</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('youtube-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmInsertYouTube()">Insert Video</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Featured Image Modal -->
+  <div class="modal" id="featured-image-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Set Featured Image</h2>
+        <button class="modal-close" onclick="closeModal('featured-image-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>Image URL</label>
+        <input type="url" id="modal-featured-url" placeholder="https://example.com/image.jpg">
+        <div class="image-preview-modal" id="modal-featured-preview"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('featured-image-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="confirmFeaturedImage()">Set Image</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="delete-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Delete Post</h2>
+        <button class="modal-close" onclick="closeModal('delete-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this post? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('delete-modal')">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmDeletePost()">Delete</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Batch Delete Confirmation Modal -->
+  <div class="modal" id="batch-delete-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Delete Selected Posts</h2>
+        <button class="modal-close" onclick="closeModal('batch-delete-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="batch-delete-count">0</strong> selected posts? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('batch-delete-modal')">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmBatchDelete()">Delete All</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Calendar Task Modal -->
+  <div class="modal" id="calendar-task-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="task-modal-title">Add Task</h2>
+        <button class="modal-close" onclick="closeModal('calendar-task-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label>Task Title</label>
+        <input type="text" id="task-title" placeholder="Enter task title">
+        <label>Date</label>
+        <input type="date" id="task-date">
+        <label>Type</label>
+        <select id="task-type">
+          <option value="content">Content</option>
+          <option value="review">Review</option>
+          <option value="publish">Publish</option>
+          <option value="other">Other</option>
+        </select>
+        <label>Description (optional)</label>
+        <textarea id="task-description" placeholder="Task description..." rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('calendar-task-modal')">Cancel</button>
+        <button class="btn btn-danger" id="delete-task-btn" style="display: none;" onclick="deleteCalendarTask()">Delete</button>
+        <button class="btn btn-primary" onclick="saveCalendarTask()">Save Task</button>
+      </div>
+    </div>
+  </div>
+                                        <!-- ============================================-->
+                                              <!--MADE BY MD TOUHIDUL ISLAM KANON-->
+                                        <!-- ============================================-->
+  <!-- Inactivity Warning Modal -->
+  <div class="modal" id="inactivity-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Session Expiring</h2>
+        <button class="modal-close" onclick="closeModal('inactivity-modal'); resetInactivityTimer();">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="inactivity-warning">
+          <i class="fas fa-clock"></i>
+          <p>Your session will expire in <strong id="countdown-timer">60</strong> seconds due to inactivity.</p>
+          <p>All unsaved changes will be saved as drafts before logout.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="logoutNow()">Logout Now</button>
+        <button class="btn btn-primary" onclick="closeModal('inactivity-modal'); resetInactivityTimer();">Stay Logged In</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Coupon Create/Edit Modal -->
+  <div class="modal" id="coupon-modal">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h2 id="coupon-modal-title">Create Coupon</h2>
+        <button class="modal-close" onclick="closeModal('coupon-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body coupon-modal-body">
+        <div class="coupon-form-grid">
+          <!-- Basic Info Section -->
+          <div class="coupon-section">
+            <h4><i class="fas fa-info-circle"></i> Basic Information</h4>
+            <div class="form-group">
+              <label>Coupon Code <span class="required">*</span></label>
+              <input type="text" id="coupon-code" placeholder="e.g., SAVE20" class="uppercase-input" oninput="this.value = this.value.toUpperCase().replace(/\s/g, '')">
+              <span class="input-hint">Use uppercase letters and numbers only, no spaces</span>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="coupon-description" placeholder="Brief description of the coupon..." rows="2"></textarea>
+            </div>
+          </div>
+          
+          <!-- Discount Configuration -->
+          <div class="coupon-section">
+            <h4><i class="fas fa-percent"></i> Discount Configuration</h4>
+            <div class="form-group">
+              <label>Discount Type <span class="required">*</span></label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="discount-type" value="percentage" checked onchange="toggleDiscountType()">
+                  <span class="radio-custom"></span>
+                  <span>Percentage (%)</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="discount-type" value="fixed" onchange="toggleDiscountType()">
+                  <span class="radio-custom"></span>
+                  <span>Fixed Amount</span>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Percentage Input -->
+            <div class="form-group discount-percentage-group">
+              <label>Discount Percentage <span class="required">*</span></label>
+              <div class="input-with-suffix">
+                <input type="number" id="coupon-percentage" min="1" max="100" value="10">
+                <span class="input-suffix">%</span>
+              </div>
+            </div>
+            
+            <!-- Fixed Amount Inputs -->
+            <div class="form-group discount-fixed-group" style="display: none;">
+              <label>Fixed Discount Amount <span class="required">*</span></label>
+              <div class="fixed-amount-grid">
+                <div class="amount-input-group">
+                  <span class="country-label">🇧🇩 Bangladesh</span>
+                  <div class="input-with-prefix">
+                    <span class="input-prefix">৳</span>
+                    <input type="number" id="coupon-amount-bd" min="0" value="0" placeholder="Amount in BDT">
+                  </div>
+                </div>
+                <div class="amount-input-group">
+                  <span class="country-label">🇮🇩 Indonesia</span>
+                  <div class="input-with-prefix">
+                    <span class="input-prefix">Rp</span>
+                    <input type="number" id="coupon-amount-id" min="0" value="0" placeholder="Amount in IDR">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Validity & Restrictions -->
+          <div class="coupon-section">
+            <h4><i class="fas fa-filter"></i> Validity & Restrictions</h4>
+            <div class="form-group">
+              <label>Valid for Packages <span class="required">*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="package-all" checked onchange="togglePackageAll()">
+                  <span class="checkbox-custom"></span>
+                  <span>All Packages</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="package-basic" class="package-checkbox" disabled>
+                  <span class="checkbox-custom"></span>
+                  <span>Basic</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="package-professional" class="package-checkbox" disabled>
+                  <span class="checkbox-custom"></span>
+                  <span>Professional</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="package-executive" class="package-checkbox" disabled>
+                  <span class="checkbox-custom"></span>
+                  <span>Executive</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Valid Countries <span class="required">*</span></label>
+              <div class="checkbox-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="country-bd" checked>
+                  <span class="checkbox-custom"></span>
+                  <span>🇧🇩 Bangladesh</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="country-id" checked>
+                  <span class="checkbox-custom"></span>
+                  <span>🇮🇩 Indonesia</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Expiry Date <span class="required">*</span></label>
+              <input type="datetime-local" id="coupon-expiry">
+            </div>
+          </div>
+          
+          <!-- Usage Limits -->
+          <div class="coupon-section">
+            <h4><i class="fas fa-lock"></i> Usage Limits</h4>
+            <div class="form-group">
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="usage-limit" value="unlimited" checked onchange="toggleUsageLimit()">
+                  <span class="radio-custom"></span>
+                  <span>Unlimited Uses</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="usage-limit" value="limited" onchange="toggleUsageLimit()">
+                  <span class="radio-custom"></span>
+                  <span>Limited Uses</span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group max-uses-group" style="display: none;">
+              <label>Maximum Uses</label>
+              <input type="number" id="coupon-max-uses" min="1" value="100">
+            </div>
+            
+            <div class="form-group">
+              <label>Status</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="coupon-status" value="active" checked>
+                  <span class="radio-custom"></span>
+                  <span>Active</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="coupon-status" value="inactive">
+                  <span class="radio-custom"></span>
+                  <span>Inactive</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Preview Section -->
+          <div class="coupon-section coupon-preview-section">
+            <h4><i class="fas fa-eye"></i> Discount Preview</h4>
+            <div class="discount-preview">
+              <div class="preview-item">
+                <span class="preview-label">🇧🇩 Basic (৳1,999)</span>
+                <span class="preview-discount" id="preview-bd-basic">- ৳0</span>
+              </div>
+              <div class="preview-item">
+                <span class="preview-label">🇧🇩 Professional (৳2,999)</span>
+                <span class="preview-discount" id="preview-bd-professional">- ৳0</span>
+              </div>
+              <div class="preview-item">
+                <span class="preview-label">🇧🇩 Executive (৳4,999)</span>
+                <span class="preview-discount" id="preview-bd-executive">- ৳0</span>
+              </div>
+              <div class="preview-divider"></div>
+              <div class="preview-item">
+                <span class="preview-label">🇮🇩 Basic (Rp 199,000)</span>
+                <span class="preview-discount" id="preview-id-basic">- Rp 0</span>
+              </div>
+              <div class="preview-item">
+                <span class="preview-label">🇮🇩 Professional (Rp 299,000)</span>
+                <span class="preview-discount" id="preview-id-professional">- Rp 0</span>
+              </div>
+              <div class="preview-item">
+                <span class="preview-label">🇮🇩 Executive (Rp 499,000)</span>
+                <span class="preview-discount" id="preview-id-executive">- Rp 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('coupon-modal')">Cancel</button>
+        <button class="btn btn-danger" id="delete-coupon-btn" style="display: none;" onclick="showDeleteCouponConfirm()">
+          <i class="fas fa-trash"></i> Delete
+        </button>
+        <button class="btn btn-primary" onclick="saveCoupon()">
+          <i class="fas fa-save"></i> <span id="save-coupon-btn-text">Create Coupon</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete Coupon Confirmation Modal -->
+  <div class="modal" id="delete-coupon-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Delete Coupon</h2>
+        <button class="modal-close" onclick="closeModal('delete-coupon-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete coupon <strong id="delete-coupon-code"></strong>? This action cannot be undone.</p>
+        <p class="warning-text"><i class="fas fa-exclamation-triangle"></i> All usage history will be preserved for reporting purposes.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('delete-coupon-modal')">Cancel</button>
+        <button class="btn btn-danger" onclick="confirmDeleteCoupon()">Delete Coupon</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Coupon Analytics Detail Modal -->
+  <div class="modal" id="coupon-analytics-modal">
+    <div class="modal-content modal-xl">
+      <div class="modal-header">
+        <h2><i class="fas fa-chart-bar"></i> Coupon Analytics: <span id="analytics-modal-coupon-code"></span></h2>
+        <button class="modal-close" onclick="closeModal('coupon-analytics-modal')">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="coupon-analytics-modal-body">
+        <!-- Content loaded dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="closeModal('coupon-analytics-modal')">Close</button>
+        <button class="btn btn-primary" onclick="exportSingleCouponReport()">
+          <i class="fas fa-download"></i> Export Report
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/js/firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/admin/auth.js"></script>
+  <script src="/admin/cms.js"></script>
+  <script src="/admin/coupon.js"></script>
+</body>
+</html>
+<!-- ============================================-->
+      <!--MADE BY MD TOUHIDUL ISLAM KANON-->
+<!-- ============================================-->
