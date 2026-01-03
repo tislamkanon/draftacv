@@ -45,8 +45,7 @@ DraftaCV is a professional resume writing service platform featuring:
 - Protected admin CMS
 
 ### Hosting
-- GitHub Pages (current)
-- Firebase Hosting compatible
+- Firebase Hosting
 
 ---
 
